@@ -1,0 +1,36 @@
+/**
+ *Class for the dark small trees
+ */
+class SmallTreesDark
+{
+  private float x, y;//for the position of the trees
+  private int w, l;//for image size
+  
+  //constanat
+  private final PImage smallTreeDarkImg = loadImage("Tree_Small_Dark.png");
+  
+  //constructor
+  public SmallTreesDark(float x, float y, int w, int l)
+  {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.l = l;
+  }
+  
+  /**
+   *displys the trees
+   */
+  public void display()
+  {
+    image(smallTreeDarkImg, x, y, w, l);
+  }
+  
+  /**
+   *moves the trees
+   */
+  public void moveRight()
+  {
+    x -= 12;
+  }
+}
