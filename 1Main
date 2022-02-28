@@ -1,0 +1,147 @@
+/**
+ *Create Task for AP Comp Sci Principals
+ *
+ *@author Kyleigh Moffatt
+ *@version December 7, 2021
+ */
+ 
+PImage chooseYourCharcater;
+PImage lightingEffect;
+
+Sprite [] characterSprite = new Sprite[3];
+int index = 0;
+
+BigTrees [] bigTrees = new BigTrees[250];
+BigTreesDark [] bigTreesDark = new BigTreesDark[250];
+SmallTrees [] smallTrees = new SmallTrees[150];
+SmallTreesDark [] smallTreesDark = new SmallTreesDark[150];
+
+float xSpace1 = random(150, 300);
+float xSpace2 = random(200, 400);
+float xSpace3 = random(200, 600);//for the random distances between trees
+
+void setup()
+{
+  size(1200, 800);
+  background(#06102D);
+  frameRate(4);
+ 
+  //loadImages
+  lightingEffect = loadImage("Lighting_Effect.png");
+  
+  //initialize the Dark Small Trees
+  for(int i = 0; i < smallTrees.length; i++)
+  {
+    smallTreesDark[i] = new SmallTreesDark(i*xSpace1, random(height/4-250, height/4-450) , 566/2, 728/2); //random(height/7*6, height/7*6+100)
+  }
+  
+  //initialize the Regular Big Trees in the background
+  for(int i = 0; i < bigTrees.length; i++)
+  {
+    bigTrees[i] = new BigTrees(i*xSpace2, random(height/8-100, height/4-100), 566/2, 728/2);
+  }
+
+  //initialize the Regular Small Trees
+  for(int i = 0; i < smallTrees.length; i++)
+  {
+    smallTrees[i] = new SmallTrees(i*xSpace2, random(height/2, height/2+100) , 566/2, 728/2); //random(height/7*6, height/7*6+100)
+  }
+  
+  //initialize the Dark Big Trees in the foreground
+  for(int i = 0; i < bigTreesDark.length; i++)
+  {
+    bigTreesDark[i] = new BigTreesDark(i*xSpace3, random(height/9*7, height/9*7+75), 566/2+113, 728/2+145);
+  }
+  
+  //initialize the Charcater Sprite
+  for(int i = 0; i < characterSprite.length; i++)
+  {
+    characterSprite[i] = new Sprite(350, 350, 176, 198);  //234, 264  117, 132
+  }
+}
+
+void draw()
+{
+  noStroke();
+  background(#06102D);
+  
+  fill(#29324c);
+  rect(-1, 225, 4800, 600); //Darkest part of snow on ground
+  
+  fill(#4a577c);
+  rect(-1, 400, 4800, 350); //Medium part of snow on ground
+  
+  fill(#7787B5);
+  rect(-1, 450, 4800, 250);//Lightest part of snow on ground
+  
+  
+  //display the back row of small dark trees
+  for(int i = 0; i < smallTreesDark.length; i++)
+  {
+    smallTreesDark[i].display();
+  
+    //for small trees movement that gives illusion of character movement
+    if(keyPressed)
+    {
+      if(keyCode == RIGHT)
+      {
+        smallTreesDark[i].moveRight();
+      }
+    }
+  } 
+  
+  //display the first row of regular big trees
+  for(int i = 0; i < bigTrees.length; i++)
+  {
+    bigTrees[i].display();
+    
+    //for trees movement that gives illusion of character movement
+    if(keyPressed)
+    {
+      if(keyCode == RIGHT)
+      {
+        bigTrees[i].moveRight();
+      }
+    }
+  }
+  
+  //display the animated sprite
+  for(int i = 0; i < characterSprite.length; i++)
+  {
+    characterSprite[i].display();
+    characterSprite[i].bounce();
+  }  
+  
+  //display the middle row of regular small tree
+  for(int i = 0; i < smallTrees.length; i++)
+  {
+    smallTrees[i].display();
+    
+    //for small trees movement that gives illusion of character movement
+    if(keyPressed)
+    {
+      if(keyCode == RIGHT)
+      {
+        smallTrees[i].moveRight();
+      }
+    }
+  } 
+  
+  //display the front row of dark big Trees
+  for(int i = 0; i < bigTreesDark.length; i++)
+  {
+    bigTreesDark[i].display();
+    
+    //for trees movement that gives illusion of character movement
+    if(keyPressed)
+    {
+      if(keyCode == RIGHT)
+      {
+        bigTreesDark[i].moveRight();
+      }
+    }
+  } 
+  
+  //flaslight beam
+  image(lightingEffect, 0, 0);
+}
