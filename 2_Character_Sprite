@@ -1,0 +1,42 @@
+/**
+ * Class for the Charcater Sprite
+ */
+class Sprite
+{
+  private float x, y;//for the position of the charcater
+  private int w, l;//for the sixe of the images
+  
+  private int index;
+  
+  //constant
+  private final PImage [] SPRITEIMG = {loadImage("MainC_Layer_1.png"), loadImage("MainC_Layer_2.png"), loadImage("MainC_Layer_3.png")};
+  
+  //constructor
+  public Sprite(float x, float y, int w, int l)
+  {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.l = l;
+  }
+  
+  /**
+   *displays the sprite
+   */
+   public void display()
+   {
+     image(SPRITEIMG[index], x, y, w, l);
+   }
+   
+   /**
+   *makes the sprite bounce 
+   */
+   void bounce()
+  {
+    index++;
+    if (index >= SPRITEIMG.length)
+    {
+      index = 0;
+    }
+  }
+}
